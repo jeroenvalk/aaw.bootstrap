@@ -1,4 +1,4 @@
-package nl.aaw.xml;
+package nl.agentsatwork.xml;
 
 import java.util.Map;
 
