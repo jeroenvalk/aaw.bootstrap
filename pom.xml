@@ -1,11 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<name>bootstrap</name>
+	<artifactId>aaw-bootstrap</artifactId>
+	<name>bootstrap</name><!-- must be artifactId minus 'aaw-' for googlecode -->
 	<description>AAW's bootstrap dependency (indirectly included in any other AAW project or dependency)</description>
 	<!-- DO NOT EDIT BELOW THIS LINE -->
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>6</version>
+	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.aaw</groupId>
-	<artifactId>aaw-${project.name}</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<url>http://aaw.googlecode.com/</url>
 	<licenses>
