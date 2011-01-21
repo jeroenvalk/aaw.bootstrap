@@ -3,6 +3,15 @@
 	<artifactId>aaw-bootstrap</artifactId>
 	<name>bootstrap</name><!-- must be artifactId minus 'aaw-' for googlecode -->
 	<description>AAW's bootstrap dependency (indirectly included in any other AAW project or dependency)</description>
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 	<!-- DO NOT EDIT BELOW THIS LINE -->
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -21,8 +30,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>http://code.google.com/p/aaw/source/browse/?repo=${project.name}</url>
 		<connection>scm:hg:https://${project.name}.aaw.googlecode.com/hg/ aaw-${project.name}</connection>
+		<developerConnection>scm:hg:https://${project.name}.aaw.googlecode.com/hg/ aaw-${project.name}</developerConnection>
+		<url>http://code.google.com/p/aaw/source/browse/?repo=${project.name}</url>
 	</scm>
 	<developers>
 		<developer>
@@ -32,13 +42,4 @@
 			<organization>agents@work</organization>
 		</developer>
 	</developers>
-	<dependencies>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-	</dependencies>
 </project>
