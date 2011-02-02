@@ -3,7 +3,7 @@ package nl.agentsatwork.xml;
 import java.util.List;
 import java.util.Map;
 
-public interface Tuple<A> extends List<A> {
+public interface Descendants<A> extends List<A> {
 
 	A singleton();
 
@@ -15,6 +15,8 @@ public interface Tuple<A> extends List<A> {
 
 	void put(String name, String[] values);
 
-	Tuple<Tuple<A>> xpath(String path);
+	Descendants<Descendants<A>> xpath(String path);
+	
+	A flatten();
 
 }
