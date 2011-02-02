@@ -5,6 +5,8 @@ import java.util.Map;
 
 public interface Descendants<A> extends List<A> {
 
+	void setParent(Element parent);
+	
 	A singleton();
 
 	String[] getTagNames();
@@ -17,6 +19,6 @@ public interface Descendants<A> extends List<A> {
 
 	Descendants<Descendants<A>> xpath(String path);
 	
-	A flatten();
+	Descendants<Element> flatten(int levels);
 
 }

@@ -4,58 +4,52 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import nl.agentsatwork.boot.Cons;
-import nl.agentsatwork.boot.Init;
+import nl.agentsatwork.xml.AbstractElement;
 import nl.agentsatwork.xml.Element;
 
 import org.apache.log4j.Logger;
 
-public abstract class Root implements Cons<Element>, Init<Element>, Element {
+public class Root extends AbstractElement implements Element {
 	static private Logger logger = Logger.getLogger(Root.class);
-	
-	private Map<String, String> attr = new HashMap<String, String>();
+
+	static private Map<File, Root> map = new HashMap<File, Root>();
+	static private Map<Root, File> pam = new HashMap<Root, File>();
 
 	private String xpath = null;
-	private File root = null;
-
-	protected String getXpath() {
-		return xpath;
-	}
-	
-	protected File getRoot() {
-		return root;
-	}
-	
-	public String getTagName() {
-		return "root";
-	}
-
-	public String get(String name) {
-		return attr.get(name);
-	}
-
-	public void put(String name, String value) {
-		attr.put(name, value);
-	}
-
-	public Map<String, String> attr() {
-		return attr;
-	}
 
 	public Element init(String xpath) {
-		if (this.xpath == null) {
-			assert root == null;
-			root = new File(".");
-			if (!root.isDirectory()) {
-				logger.error("cannot set working directory as root");
-				root = null;
-				return null;
+		if (xpath == null || xpath.equals("")) {
+			File file = pam.get(this);
+			pam.remove(this);
+			map.remove(file);
+			xpath = null;
+			return null;
+		}
+		if (root == null) {
+			File file = new File(xpath);
+			if (map.containsKey(file)) {
+				assert pam.containsKey(map.get(file));
+				assert pam.get(map.get(file)).equals(file);
+				assert map.get(pam.get(map.get(file))) == map.get(file);
+				return map.get(file).init(xpath);
+			} else {
+				if (!file.isDirectory()) {
+					if (file.mkdirs()) {
+						logger.info("directory '"+file.getPath()+"' created");
+					} else {
+						logger.error("cannot create directory '"+file.getPath()+"'");
+					}
+				}
+				map.put(file, this);
+				pam.put(this, file);
+				this.xpath = xpath;
+				this.setAttributes(new RootAttributes(new File(file.getPath()
+						+ File.separator + ".properties")));
+				return this;
 			}
 		} else {
-			assert root != null;
+			return initialize(root.xpath(xpath).singleton());
 		}
-		this.xpath = xpath;
-		return this;
 	}
 
 	public boolean isInitializable() {
@@ -67,7 +61,8 @@ public abstract class Root implements Cons<Element>, Init<Element>, Element {
 	}
 
 	public Element initialize(Element config) {
+		logger.fatal("initialization not implemented");
 		throw new UnsupportedOperationException();
 	}
-	
+
 }

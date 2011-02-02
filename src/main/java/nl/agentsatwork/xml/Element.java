@@ -1,17 +1,21 @@
 package nl.agentsatwork.xml;
 
-import java.util.Map;
-
 public interface Element {
 
-	String getTagName();
+	boolean hasTagName(String tagName);
+	
+	boolean hasAttribute(String name);
+	
+	boolean exists(String xpath);
+	
+	String get();
 	
 	String get(String name);
 	
-	void put(String name, String value);
+	void set(String name, String value);
 
-	Map<String, String> attr();
+	Attributes attr();
 
-	Tuple<Element> xpath(String path);
+	Descendants<Element> xpath(String xpath);
 	
 }
