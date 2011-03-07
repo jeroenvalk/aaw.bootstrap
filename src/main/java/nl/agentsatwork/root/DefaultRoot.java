@@ -9,11 +9,11 @@ import nl.agentsatwork.xml.Element;
 
 import org.apache.log4j.Logger;
 
-public class Root extends AbstractElement implements Element {
-	static private Logger logger = Logger.getLogger(Root.class);
+public class DefaultRoot extends AbstractElement implements Element {
+	static private Logger logger = Logger.getLogger(DefaultRoot.class);
 
-	static private Map<File, Root> map = new HashMap<File, Root>();
-	static private Map<Root, File> pam = new HashMap<Root, File>();
+	static private Map<File, DefaultRoot> map = new HashMap<File, DefaultRoot>();
+	static private Map<DefaultRoot, File> pam = new HashMap<DefaultRoot, File>();
 
 	private String xpath = null;
 
@@ -53,7 +53,7 @@ public class Root extends AbstractElement implements Element {
 	}
 
 	public boolean isInitializable() {
-		return true;
+ 		return true;
 	}
 
 	public boolean isInitialized() {

@@ -1,23 +1,24 @@
 package nl.agentsatwork.boot;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import nl.agentsatwork.root.Root;
+import nl.agentsatwork.root.DefaultRoot;
 import nl.agentsatwork.xml.Element;
 
 public class Initializable<A> implements Cons<A>, Init<A> {
-	static private Logger logger = Logger.getLogger(Initializable.class);
+	static private Logger logger = LoggerFactory.getLogger(Initializable.class);
 	
 	protected Element root = null;
 	private Boolean initializable = true, initialized = false;
 
-	public void setRoot(Root root) {
+	public void setRoot(DefaultRoot root) {
 		this.root = root;
 	}
 
 	public A init(String xpath) {
 		if (root == null) {
-			root = new Root().init(".");
+			root = new DefaultRoot().init(".");
 		}
 		return initialize(root.xpath(xpath).singleton());
 	}
